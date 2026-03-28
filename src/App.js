@@ -1,24 +1,26 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Landing   from './pages/Landing';
+import Dashboard from './pages/Dashboard';
 import './App.css';
 
 function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('cf-theme') ?? 'dark');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('cf-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/"                  element={<Landing   theme={theme} onThemeToggle={toggleTheme} />} />
+        <Route path="/dashboard/:ticker" element={<Dashboard theme={theme} onThemeToggle={toggleTheme} />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

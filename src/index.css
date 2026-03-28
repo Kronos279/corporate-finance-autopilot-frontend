@@ -1,13 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* ── CSS Design Tokens ────────────────────────────────────────── */
+:root {
+  /* Dark mode (default) */
+  --bg-primary:   #0A0E14;
+  --bg-surface:   #11151C;
+  --bg-elevated:  #1A1F28;
+  --bg-card:      #151921;
+  --border:       #2A303C;
+  --border-hover: #3D4554;
+
+  --text-primary:   #F0F4F8;
+  --text-secondary: #8A94A6;
+  --text-tertiary:  #5C6675;
+
+  --accent-primary:       #1E5AA8;
+  --accent-primary-hover: #256DBF;
+  --accent-primary-glow:  rgba(30,90,168,0.15);
+
+  --accent-success:      #047857;
+  --accent-success-light: rgba(4,120,87,0.12);
+  --accent-success-text:  #10B981;
+
+  --accent-danger:       #9B1C1C;
+  --accent-danger-light:  rgba(155,28,28,0.12);
+  --accent-danger-text:   #DC2626;
+
+  --accent-warning:       #B45309;
+  --accent-warning-light: rgba(180,83,9,0.12);
+  --accent-warning-text:  #F59E0B;
+
+  --accent-gold:       #B08D57;
+  --accent-gold-light: rgba(176,141,87,0.15);
+
+  --chart-blue:   #3B82F6;
+  --chart-green:  #10B981;
+  --chart-amber:  #F59E0B;
+  --chart-red:    #EF4444;
+  --chart-purple: #8B5CF6;
+}
+
+[data-theme="light"] {
+  --bg-primary:   #FAFBFC;
+  --bg-surface:   #FFFFFF;
+  --bg-elevated:  #F5F7FA;
+  --bg-card:      #FFFFFF;
+  --border:       #E2E8F0;
+  --border-hover: #CBD5E1;
+
+  --text-primary:   #0F172A;
+  --text-secondary: #64748B;
+  --text-tertiary:  #94A3B8;
+}
+
+/* ── Reset ────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: inherit; }
+
+/* ── Scrollbar (dark mode) ────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
+
+/* ── Skeleton animation ──────────────────────────────────────── */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.12; }
+  50%       { opacity: 0.28; }
 }
+.skeleton {
+  background: var(--text-secondary);
+  border-radius: 6px;
+  animation: skeleton-pulse 1.6s ease-in-out infinite;
+}
+
+/* ── Fade-up animation ───────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.25s ease-out both; }

@@ -1,0 +1,220 @@
+.dashboard-root {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Company Header ── */
+.dashboard-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-surface);
+}
+@media (max-width: 600px) {
+  .dashboard-header {
+    padding: 16px 8px;
+  }
+}
+
+.company-skeleton {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.company-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+@media (max-width: 600px) {
+  .company-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+.company-logo {
+  width: 60px;
+  height: 60px;
+  background: var(--bg-elevated);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.company-details { flex: 1; }
+
+.company-details h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.ticker-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.company-meta {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.price-info {
+  text-align: right;
+  margin-left: auto;
+}
+@media (max-width: 600px) {
+  .price-info {
+    text-align: left;
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.current-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.price-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 4px;
+}
+.price-change.positive { background: var(--accent-success-light); color: var(--accent-success-text); }
+.price-change.negative { background: var(--accent-danger-light);  color: var(--accent-danger-text); }
+
+.mktcap-line {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+/* ── Tab Bar ── */
+.tab-bar {
+  display: flex;
+  padding: 0 32px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-surface);
+  overflow-x: auto;
+}
+@media (max-width: 600px) {
+  .tab-bar {
+    padding: 0 8px;
+  }
+  .dash-tab {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+}
+
+.dash-tab {
+  padding: 16px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+.dash-tab:hover { color: var(--text-primary); }
+.dash-tab.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+/* ── Tab Content ── */
+.tab-content {
+  flex: 1;
+  padding: 28px 32px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+@media (max-width: 900px) {
+  .tab-content {
+    padding: 18px 8px;
+  }
+}
+
+/* ── Error State ── */
+.error-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+@media (max-width: 600px) {
+  .error-center {
+    padding: 16px;
+  }
+  .error-card {
+    padding: 18px;
+  }
+}
+
+.error-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 48px;
+  text-align: center;
+  max-width: 420px;
+}
+
+.error-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.error-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.error-card p {
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.error-sub { font-size: 13px; }
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--accent-primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 20px;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-primary:hover  { background: var(--accent-primary-hover); }
+.btn-primary:active { transform: scale(0.97); }

@@ -1,0 +1,182 @@
+.model-root { display: flex; flex-direction: column; gap: 24px; }
+
+.model-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.model-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loading-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  animation: blink 0.9s infinite alternate;
+}
+@keyframes blink { from { opacity: 1; } to { opacity: 0.2; } }
+
+.model-top { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .model-top { grid-template-columns: 1fr; } }
+
+.sliders-card { }
+
+.scenario-btns { display: flex; gap: 8px; margin-bottom: 20px; }
+
+.scenario-btn {
+  padding: 7px 18px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+.scenario-btn:hover  { border-color: var(--border-hover); color: var(--text-primary); }
+.scenario-btn.active { background: var(--accent-primary); color: #fff; border-color: var(--accent-primary); }
+
+.sliders-grid { display: flex; flex-direction: column; gap: 16px; }
+
+.slider-row { display: flex; flex-direction: column; gap: 6px; }
+
+.slider-meta { display: flex; justify-content: space-between; align-items: center; }
+
+.slider-label { font-size: 12px; color: var(--text-secondary); }
+
+.slider-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  outline: none;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  cursor: pointer;
+  border: 2px solid var(--bg-primary);
+  transition: transform 0.15s;
+}
+.slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+.dcf-card { display: flex; flex-direction: column; }
+
+.dcf-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+.dcf-row:last-child { border-bottom: none; }
+
+.dcf-label { font-size: 13px; color: var(--text-secondary); }
+
+.dcf-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.dcf-value.positive { color: var(--accent-success-text); }
+.dcf-value.negative { color: var(--accent-danger-text); }
+
+.mini-skeleton {
+  height: 160px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+/* reuse fin-table styles */
+.fin-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px 0;
+}
+
+.fin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.fin-table thead th {
+  text-align: right;
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  border-bottom: 1px solid var(--border);
+}
+.fin-table thead th.row-label { text-align: left; }
+.fin-table tbody tr:hover { background: var(--bg-elevated); }
+
+.row-label {
+  text-align: left !important;
+  padding: 11px 16px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.mono-cell {
+  text-align: right;
+  padding: 11px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+/* Sensitivity */
+.sen-wrap { overflow-x: auto; }
+
+.sen-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.sen-table th {
+  padding: 10px 12px;
+  background: var(--bg-elevated);
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.sen-table td {
+  text-align: center;
+  padding: 9px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  border: 1px solid var(--border);
+}
+.sen-cell.green { color: var(--accent-success-text); background: rgba(16,185,129,0.08); }
+.sen-cell.red   { color: var(--accent-danger-text);  background: rgba(220,38,38,0.08); }
