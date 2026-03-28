@@ -144,7 +144,7 @@ export default function FinancialsTab({ data }) {
                   formatter={(v) => `${(v*100).toFixed(1)}%`} />
                 <Legend wrapperStyle={{ fontSize: 12, color: 'var(--text-secondary)' }} />
                 <Line type="monotone" dataKey="gross_margin"     stroke="var(--accent-primary)"       strokeWidth={2} dot={false} name="Gross" />
-                <Line type="monotone" dataKey="ebitda_margin"    stroke="var(--accent-gold)"           strokeWidth={2} dot={false} name="EBITDA" />
+                <Line type="monotone" dataKey="operating_margin"    stroke="var(--accent-gold)"           strokeWidth={2} dot={false} name="Operating" />
                 <Line type="monotone" dataKey="net_margin"       stroke="var(--accent-success-text)"   strokeWidth={2} dot={false} name="Net" />
               </LineChart>
             </ResponsiveContainer>
