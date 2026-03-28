@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend
 } from 'recharts';
@@ -88,7 +88,7 @@ export default function ModelTab({ data, ticker }) {
   useEffect(() => {
     if (!Object.keys(debouncedAssumptions).length) return;
     const wacc = debouncedAssumptions.wacc ?? 0.10;
-    const tg   = debouncedAssumptions.terminal_growth_rate ?? 0.025;
+   // const tg   = debouncedAssumptions.terminal_growth_rate ?? 0.025;
     const rg   = debouncedAssumptions.revenue_growth_rate ?? 0.08;
     // Generate ranges around current values for sensitivity
     const makeRange = (center, spread, steps) => {

@@ -44,7 +44,6 @@ export default function Dashboard({ onThemeToggle, theme }) {
   }, [ticker]);
 
   const profile   = data?.profile ?? {};
-  const keyStats  = data?.key_stats ?? {};
   const priceHist = data?.price_history ?? [];
 
   const latestPrice = priceHist.length ? priceHist[priceHist.length - 1]?.close : null;
