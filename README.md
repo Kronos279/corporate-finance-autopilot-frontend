@@ -47,7 +47,5 @@ A modern, responsive web app for financial analysis, scenario modeling, and AI-p
   - `App.js` — Main app entry
 
 ## Notes
-
-- **Implied Price and Sensitivity analysis have been removed** from the Model tab for simplicity.
 - All financial data is fetched from the backend API.
 - For deployment, ensure your environment variables are set correctly.
