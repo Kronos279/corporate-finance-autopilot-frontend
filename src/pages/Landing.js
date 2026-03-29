@@ -45,7 +45,7 @@ export default function Landing({ onThemeToggle, theme }) {
             <input
               className="search-input"
               type="text"
-              placeholder="🔍  Enter ticker symbol…"
+              placeholder="🔍 Enter ticker symbol…"
               value={ticker}
               onChange={(e) => setTicker(e.target.value.toUpperCase())}
               autoFocus
