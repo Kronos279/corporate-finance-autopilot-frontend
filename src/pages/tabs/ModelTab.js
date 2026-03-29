@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend
 } from 'recharts';
-import { getScenarios, postForecast, postDCF, postSensitivity } from '../../api';
+import { getScenarios, postForecast, postDCF } from '../../api';
 import './ModelTab.css';
 
 const SCENARIOS = ['base', 'upside', 'downside'];
@@ -52,7 +52,7 @@ export default function ModelTab({ data, ticker }) {
   const [forecast,       setForecast]      = useState(null);
   const [allForecasts,   setAllForecasts]  = useState({});
   const [dcf,            setDcf]           = useState(null);
-  const [sensitivity,    setSensitivity]   = useState(null);
+  // const [sensitivity,    setSensitivity]   = useState(null); // Removed: no longer used
   const [loading,        setLoading]       = useState(false);
   const scenariosRef = useRef(null);
 
@@ -97,28 +97,13 @@ export default function ModelTab({ data, ticker }) {
   // Run forecast, DCF, sensitivity when assumptions settle
   useEffect(() => {
     if (!Object.keys(debouncedAssumptions).length) return;
-    const wacc = debouncedAssumptions.wacc ?? 0.10;
-   // const tg   = debouncedAssumptions.terminal_growth_rate ?? 0.025;
-    const rg   = debouncedAssumptions.revenue_growth_rate ?? 0.08;
-    // Generate ranges around current values for sensitivity
-    const makeRange = (center, spread, steps) => {
-      const out = [];
-      for (let i = 0; i < steps; i++) out.push(+(center - spread + (2 * spread * i / (steps - 1))).toFixed(4));
-      return out;
-    };
+    // Removed unused variables: wacc, rg, makeRange
     (async () => {
       setLoading(true);
       try {
-        const [fRes, dcfRes, senRes] = await Promise.allSettled([
+        const [fRes, dcfRes] = await Promise.allSettled([
           postForecast(ticker,     { assumptions: debouncedAssumptions, years: 5 }),
-          postDCF(ticker,          { assumptions: debouncedAssumptions, years: 5 }),
-          postSensitivity(ticker,  {
-            assumptions: debouncedAssumptions,
-            param_x: 'revenue_growth_rate',
-            param_y: 'wacc',
-            range_x: makeRange(rg, 0.04, 5),
-            range_y: makeRange(wacc, 0.03, 5),
-          }),
+          postDCF(ticker,          { assumptions: debouncedAssumptions, years: 5 })
         ]);
 
         if (fRes.status === 'fulfilled')   {
@@ -128,7 +113,6 @@ export default function ModelTab({ data, ticker }) {
           setForecast(fData);
         }
         if (dcfRes.status === 'fulfilled') setDcf(dcfRes.value.data?.dcf ?? dcfRes.value.data);
-        if (senRes.status === 'fulfilled') setSensitivity(senRes.value.data?.result ?? senRes.value.data);
       } finally { setLoading(false); }
     })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -255,47 +239,3 @@ export default function ModelTab({ data, ticker }) {
   );
 }
 
-function SensitivityGrid({ data, currentPrice }) {
-  // Backend returns: {param_x_name, param_y_name, output_name, cells: [{param_x_value, param_y_value, output_value}]}
-  const cells = data?.cells ?? [];
-  if (!cells.length) return null;
-
-  // Extract unique x and y values
-  const xVals = [...new Set(cells.map((c) => c.param_x_value))].sort((a, b) => a - b);
-  const yVals = [...new Set(cells.map((c) => c.param_y_value))].sort((a, b) => a - b);
-  const paramX = data?.param_x_name ?? 'Param X';
-  const paramY = data?.param_y_name ?? 'Param Y';
-
-  // Build grid lookup
-  const lookup = {};
-  cells.forEach((c) => { lookup[`${c.param_x_value}_${c.param_y_value}`] = c.output_value; });
-
-  return (
-    <div className="sen-wrap">
-      <table className="sen-table">
-        <thead>
-          <tr>
-            <th>{paramX} \ {paramY}</th>
-            {yVals.map((y) => <th key={y}>{pct(y)}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {xVals.map((x, i) => (
-            <tr key={i}>
-              <td>{pct(x)}</td>
-              {yVals.map((y, j) => {
-                const v = lookup[`${x}_${y}`];
-                const above = currentPrice && v >= currentPrice;
-                return (
-                  <td key={j} className={`sen-cell ${above ? 'green' : 'red'}`}>
-                    ${v != null ? v.toFixed(0) : '—'}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}

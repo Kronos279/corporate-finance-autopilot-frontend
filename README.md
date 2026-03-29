@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# Corporate Finance Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive web app for financial analysis, scenario modeling, and AI-powered advisory, built with React and Recharts.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Company Search & Quick Tickers**: Instantly search for public companies and access quick tickers.
+- **Dashboard**: Tabbed navigation for Financials, Model, Advisory, and Reports.
+- **Financials Tab**: Visualize Revenue vs Net Income, Margin Trends, and view detailed financial tables (Income Statement, Balance Sheet, Cash Flow).
+- **Model Tab**: Scenario analysis with interactive sliders and multi-scenario revenue chart. (Implied Price and Sensitivity analysis have been removed for simplicity.)
+- **Advisory Tab**: AI-powered chat for financial questions and capital structure summary.
+- **Reports Tab**: Generate and preview company reports.
+- **Responsive Design**: Works great on desktop and mobile.
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Set API URL:**
+   - Create a `.env` file in the `frontend` directory:
+     ```env
+     REACT_APP_API_URL=https://corporate-finance-autopilot-566338799391.us-central1.run.app
+     ```
+   - Or set the environment variable in your deployment platform (e.g., Vercel dashboard).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Run the app locally:**
 
-### `npm test`
+   ```bash
+   npm start
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### `npm run build`
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `src/`
+  - `components/` — Reusable UI components
+  - `pages/` — Main app pages and tabs
+  - `api/` — API integration
+  - `App.js` — Main app entry
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Notes
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Implied Price and Sensitivity analysis have been removed** from the Model tab for simplicity.
+- All financial data is fetched from the backend API.
+- For deployment, ensure your environment variables are set correctly.
