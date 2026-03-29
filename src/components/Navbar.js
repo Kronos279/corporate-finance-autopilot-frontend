@@ -14,7 +14,7 @@ export default function Navbar({ showBack = false, onThemeToggle, theme }) {
         )}
         <div className="logo">
           <div className="logo-icon">CF</div>
-          <span className="logo-text">Corporate Finance Autopilot</span>
+          <span className="logo-text">Corporate Finance Autopilot - Built by Ashutosh</span>
         </div>
       </div>
       <div className="navbar-right">

@@ -57,20 +57,30 @@ export default function ModelTab({ data, ticker }) {
   const scenariosRef = useRef(null);
 
   // Load scenarios on mount
+ // Load scenarios on mount
   useEffect(() => {
     (async () => {
       try {
         const res = await getScenarios(ticker);
-        // Backend returns array: [{scenario, assumptions, forecast}, ...]
         const arr = res.data;
         const dict = {};
+        
         if (Array.isArray(arr)) {
-          arr.forEach((s) => { dict[s.scenario] = s; });
+          arr.forEach((s) => { 
+            dict[s.scenario] = s; 
+          });
         }
+        
         scenariosRef.current = dict;
+
+        // FIX: This fills the state so the chart has Upside/Downside data immediately
+        setAllForecasts(dict); 
+        
         const baseAssumptions = dict.base?.assumptions ?? {};
         setAssumptions(baseAssumptions);
-      } catch {}
+      } catch (err) {
+        console.error("Failed to load scenarios:", err);
+      }
     })();
   }, [ticker]);
 
