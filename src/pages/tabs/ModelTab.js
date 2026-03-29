@@ -191,7 +191,6 @@ export default function ModelTab({ data, ticker }) {
               {[
                 { label: 'Enterprise Value',  value: fmtB(dcf.enterprise_value) },
                 { label: 'Equity Value',      value: fmtB(dcf.equity_value) },
-                { label: 'Implied Price',     value: dcf.implied_price ? `$${dcf.implied_price.toFixed(2)}` : '—' },
                 { label: 'Current Price',     value: dcf.current_price ? `$${dcf.current_price.toFixed(2)}` : '—' },
                 { label: 'Upside / Downside', value: pct(dcf.upside_pct), cls: dcf.upside_pct >= 0 ? 'positive' : 'negative' },
               ].map(({ label, value, cls }) => (
@@ -251,13 +250,7 @@ export default function ModelTab({ data, ticker }) {
         </div>
       )}
 
-      {/* Sensitivity Grid */}
-      {sensitivity && (
-        <div className="model-card">
-          <div className="model-card-title">Sensitivity Analysis — Implied Price</div>
-          <SensitivityGrid data={sensitivity} currentPrice={dcf?.current_price} />
-        </div>
-      )}
+      {/* Sensitivity Grid removed */}
     </div>
   );
 }

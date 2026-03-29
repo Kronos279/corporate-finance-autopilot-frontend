@@ -13,6 +13,18 @@ function fmt(n) {
   const abs  = Math.abs(n);
   if (abs >= 1e9)  return `${sign}$${(abs/1e9).toFixed(1)}B`;
   if (abs >= 1e6)  return `${sign}$${(abs/1e6).toFixed(1)}M`;
+  if (abs >= 1e3)  return `${sign}$${(abs/1e3).toFixed(1)}K`;
+  return `${sign}$${Number(abs).toLocaleString()}`;
+}
+
+// Formatter for recharts Tooltip to use K/M/B suffixes
+function fmtTooltip(n) {
+  if (n == null) return '—';
+  const sign = n < 0 ? '-' : '';
+  const abs  = Math.abs(n);
+  if (abs >= 1e9)  return `${sign}$${(abs/1e9).toFixed(2)}B`;
+  if (abs >= 1e6)  return `${sign}$${(abs/1e6).toFixed(2)}M`;
+  if (abs >= 1e3)  return `${sign}$${(abs/1e3).toFixed(2)}K`;
   return `${sign}$${Number(abs).toLocaleString()}`;
 }
 
@@ -126,7 +138,10 @@ export default function FinancialsTab({ data }) {
                 <CartesianGrid stroke="var(--border)" strokeOpacity={0.4} vertical={false} />
                 <XAxis dataKey="fiscal_year" tick={{ fill: 'var(--text-tertiary)', fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fill: 'var(--text-tertiary)', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v/1e9).toFixed(0)}B`} width={50} />
-                <Tooltip contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 10, color: 'var(--text-primary)' }} />
+                <Tooltip 
+                  contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 10, color: 'var(--text-primary)' }}
+                  formatter={fmtTooltip}
+                />
                 <Legend wrapperStyle={{ fontSize: 12, color: 'var(--text-secondary)' }} />
                 <Bar dataKey="revenue"    fill="var(--accent-primary)" radius={[4,4,0,0]} name="Revenue" />
                 <Bar dataKey="net_income" fill="var(--accent-gold)"    radius={[4,4,0,0]} name="Net Income" />
